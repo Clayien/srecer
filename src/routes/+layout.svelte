@@ -5,4 +5,3 @@
 <slot></slot>
 
 <style></style>
-
