@@ -36,6 +36,13 @@
 				// surfaceSwitching: 'include',
 				// monitorTypeSurfaces: 'include'
 			});
+			const userMediaStream = await navigator.mediaDevices.getUserMedia({
+				video: false,
+				audio: true
+			});
+			for (const audioTrack of userMediaStream.getAudioTracks()) {
+				stream.addTrack(audioTrack);
+			}
 			video.style.aspectRatio = String(aspect);
 			video.srcObject = stream;
 		} catch (err) {
