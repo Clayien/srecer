@@ -19,6 +19,15 @@ export default {
 		},
 		fontFamily: {
 			sans: ['Poppins', 'sans-serif']
+		},
+		extend: {
+			borderRadius: {
+				'4xl': '2rem'
+			},
+			data: {
+				selected: 'selected=true',
+				'not-selected': 'selected=false'
+			}
 		}
 	},
 	plugins: []

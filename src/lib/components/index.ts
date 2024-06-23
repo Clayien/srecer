@@ -1,1 +1,2 @@
-export * from './icons/index.ts';
+export * from './icons';
+export * from './buttons';
