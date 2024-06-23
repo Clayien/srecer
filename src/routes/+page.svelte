@@ -131,13 +131,11 @@
 </script>
 
 <div class="flex size-full items-center justify-center">
-	<div class="grid w-[47rem] grid-cols-2 gap-4 lg:grid-cols-3">
-		<div
-			class="rounded-4xl border-black-800 relative col-span-full aspect-video border p-2 lg:col-span-2"
-		>
+	<div class="grid w-[31rem] grid-cols-2 gap-4">
+		<div class="rounded-4xl border-black-800 relative col-span-full aspect-video border p-2">
 			<div
 				data-recording={recording}
-				class="border-black-800 bg-black-900 group absolute -left-4 -top-4 z-20 flex aspect-square size-16 items-center justify-center rounded-full border transition-transform duration-300 data-[recording=true]:rounded-2xl"
+				class="border-black-800 bg-black-900 group absolute -right-4 -top-4 z-20 flex aspect-square size-16 items-center justify-center rounded-full border transition-transform duration-300 data-[recording=true]:rounded-2xl"
 			>
 				<button
 					class="bg-red flex size-12 rounded-full transition-transform duration-300 group-data-[recording=true]:rounded-2xl"
@@ -158,15 +156,15 @@
 				class="rounded-4xl pointer-events-none size-full appearance-none object-cover"
 			/>
 		</div>
-		<div class="col-span-full grid grid-cols-4 gap-4 lg:col-span-1 lg:aspect-square lg:grid-cols-2">
+		<div class="col-span-full grid grid-cols-4 gap-4">
 			<IconButton on:click={shareScreen}>
 				<ShareIcon />
 			</IconButton>
-			<IconButton on:click={handleDownload}>
-				<DownloadIcon />
-			</IconButton>
 			<IconButton on:click={() => {}}>
 				<MicOnIcon />
+			</IconButton>
+			<IconButton on:click={handleDownload}>
+				<DownloadIcon />
 			</IconButton>
 			<IconButton on:click={() => {}}>
 				<SettingsIcon />
