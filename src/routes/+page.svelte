@@ -77,6 +77,9 @@
 		blobs = [];
 	}
 
+	let interval: ReturnType<typeof setInterval>;
+	let recordingTime: string = '';
+	let recordingSeconds: number = 0;
 	function handleRecording() {
 		recording = !recording;
 		if (recording) {
@@ -96,11 +99,29 @@
 				};
 				recorder.start();
 				console.log('Recording started');
+
+				recordingTime = '00:00:00';
+				interval = setInterval(() => {
+					recordingSeconds += 1;
+					if (recordingSeconds > 0) {
+						const hours = Math.floor(recordingSeconds / 3600)
+							.toString()
+							.padStart(2, '0');
+						const remainingSeconds = recordingSeconds % 3600;
+						const minutes = Math.floor(remainingSeconds / 60)
+							.toString()
+							.padStart(2, '0');
+						const seconds = (remainingSeconds % 60).toString().padStart(2, '0');
+
+						recordingTime = `${hours}:${minutes}:${seconds}`;
+					}
+				}, 1000);
 			} catch (err) {
 				console.error(err);
 			}
 		} else {
 			recorder.stop();
+			if (interval) clearInterval(interval);
 		}
 	}
 
@@ -116,13 +137,20 @@
 		>
 			<div
 				data-recording={recording}
-				class="border-black-800 bg-black-900 group absolute -left-4 -top-4 flex aspect-square size-16 items-center justify-center rounded-full border transition-transform duration-300 data-[recording=true]:rounded-2xl"
+				class="border-black-800 bg-black-900 group absolute -left-4 -top-4 z-20 flex aspect-square size-16 items-center justify-center rounded-full border transition-transform duration-300 data-[recording=true]:rounded-2xl"
 			>
 				<button
 					class="bg-red flex size-12 rounded-full transition-transform duration-300 group-data-[recording=true]:rounded-2xl"
 					on:click={handleRecording}
 				/>
 			</div>
+			{#if recording}
+				<div
+					class="bg-black-900/40 absolute inset-0 z-10 grid size-full place-content-center text-7xl font-black"
+				>
+					{recordingTime}
+				</div>
+			{/if}
 			<video
 				bind:this={video}
 				autoplay
